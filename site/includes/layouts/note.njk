@@ -10,37 +10,14 @@ layout: default
         <div>
 
             <header>
-                <h1>{{ title }}</h1>
+                <h2>{{ title }}</h2>
             </header>
 
-            <div>
-
+            {# <div>
                 <time datetime="{{ date }}">
                     {{ date }}
                 </time>
-
-                {% if tags %}
-
-                    {% set comma = joiner() %}
-
-                    <p>Posted in
-
-                        {% for item in tags %}
-
-                            {%- if item != "blog" -%}
-
-                                <a href="/category/{{ item }}">{{ comma() }}
-                                    {{ item | capitalize }}</a>
-
-                            {%- endif -%}
-
-                        {% endfor %}
-
-                    </p>
-
-                {% endif %}
-
-            </div>
+            </div> #}
 
         </div>
 

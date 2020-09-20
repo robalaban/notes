@@ -4,11 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            {% if meta_title %}{{ meta_title }}
-            {% else %}{{ title }}
+            {% if title %}
+                {{ site.name }}
+                -
+                {{ title }}
             {% endif %}
-            |
-            {{ site.name }}</title>
+            {{ site.name }}
+        </title>
         <meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}{{ excerpt }}{% endif %}">
         {% if page.fileSlug === 'blog' %}
             <meta name="robots" content="noindex,follow"/>
@@ -29,6 +31,8 @@
     <body {% if body_class %} id="{{ body_class }}" {% endif %}>
 
         <a class="sr-only" href="#main">Skip to content</a>
+
+        {% include "partials/header.njk" %}
 
         <div id="wrapper">
 

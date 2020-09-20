@@ -1,11 +1,18 @@
-<body>
-    <h2>Notes</h2>
+---
+layout: default
+title: Welcome
+---
 
-    <ul>
-        {%- for note in collections.note -%}
-            <li>
-                <a href="{{ note.url }}">{{ note.data.title }}</a>
-            </li>
-        {%- endfor -%}
-    </ul>
-</body>
+{% include "partials/intro.njk" %}
+
+<h3>
+    Latest Notes
+</h3>
+
+<ul>
+    {%- for note in collections.note -%}
+        <li>
+            <a href="{{ note.url }}">{{ note.data.title }}</a>
+        </li>
+    {%- endfor -%}
+</ul>

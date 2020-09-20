@@ -24,7 +24,13 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
+    "@snowpack/plugin-postcss": "^1.0.4",
     "@snowpack/plugin-run-script": "^2.1.2",
+    "postcss": "^8.0.5",
+    "postcss-cli": "^7.1.2",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-font-magician": "^2.3.1",
+    "postcss-preset-env": "^6.7.0",
     "snowpack": "^2.11.1"
   }
 }
