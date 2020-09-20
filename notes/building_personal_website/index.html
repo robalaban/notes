@@ -4,10 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Building a modern personal website and blog
             
-            |
-            </title>
+                
+                -
+                Building my personal website
+            
+            
+        </title>
         <meta name="description" content="">
         
             <meta name="robots" content="index,follow"/>
@@ -27,6 +30,16 @@
 
         <a class="sr-only" href="#main">Skip to content</a>
 
+        <header class="header">
+  <nav class="navigation">
+    
+      <a class="navigation__item" href="/">Home</a>
+    
+    <a class="navigation__item" href="https://github.com/robalaban" target="_blank">Github</a>
+    <a class="navigation__item" href="https://www.linkedin.com/in/robalaban/" target="_blank">LinkedIn</a>
+  </nav>
+</header>
+
         <div id="wrapper">
 
             
@@ -39,31 +52,10 @@
         <div>
 
             <header>
-                <h1>Building a modern personal website and blog</h1>
+                <h2>Building my personal website</h2>
             </header>
 
-            <div>
-
-                <time datetime="Sat Sep 19 2020 00:00:00 GMT+0000 (Coordinated Universal Time)">
-                    Sat Sep 19 2020 00:00:00 GMT+0000 (Coordinated Universal Time)
-                </time>
-
-                
-
-                    
-
-                    <p>Posted in
-
-                        <a href="/category/note">
-                                    Note</a><a href="/category/javascript">,
-                                    Javascript</a><a href="/category/tutorials">,
-                                    Tutorials</a>
-
-                    </p>
-
-                
-
-            </div>
+            
 
         </div>
 
@@ -73,15 +65,24 @@
 <ul>
 <li>Are personal website <em>even</em> useful in the era of Twitter / Github?</li>
 <li>Is my content worth sharing?</li>
-<li>What if people don't like the my content?</li>
 </ul>
-<p>However, I still found myself day-dreaming of what my &quot;corner&quot; of the web would look like. I had to change perspective, I had to make the project interesting enough. Turns out, making a personal website is the perfect opportunity to pick-up and learn some new technologies / methodologies. After spending a good few hours --searching-- googleing - I stumbled upon a few really interesting projects that I had to give a try. The culprits composing the stack for my webiste are the following:</p>
+<p>However, I still found myself thinking of what my <em>&quot;corner&quot;</em> of the web would look like. I had to change perspective, I had to make the project interesting enough. Luckily turns out that making a personal website is the perfect opportunity to pick-up and learn some new technologies / methodologies. After spending a good few hours seaching - I stumbled upon a few really interesting projects that I had to give a try. The culprits composing the stack for my webiste are the following:</p>
 <ul>
 <li><a href="https://www.snowpack.dev/">Snowpack</a> - Build tool</li>
 <li><a href="https://postcss.org/">PostCSS</a> - Modern CSS</li>
 <li><a href="https://native-elements.dev/">Native Elements</a> - HTML Components</li>
 <li><a href="https://www.11ty.dev/">Eleventy</a> - Static Site Generator</li>
 </ul>
+<p>Now that I have chosen and am pretty happy with the stack, I had to find out why build something from the ground up, and not use an existing framework / starter template? The answer was quite simple: <em>I want to make the website as user friendly as possible.</em> Things that are important to me:</p>
+<ul>
+<li>Accessability ( fonts, colors, navigation )</li>
+<li>Quick build time ( The turnaround time needs to be fast )</li>
+<li>Serverless ( I don't want to have any dependencies )</li>
+</ul>
+<h3>Setting up the environment</h3>
+<pre><code>mkdir Notes &amp;&amp; cd Notes
+npm init -y
+</code></pre>
 
 
         </div>
