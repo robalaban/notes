@@ -12,6 +12,13 @@ jobs:
         steps:
             - name: Check out repository
               uses: actions/checkout@v2
+            - name: Switch to gh-pages branch
+              run: |
+                  git config user.name "robalaban"
+                  git config user.email "${{ secrets.GH_MAIL }}"
+                  git remote add gh-token "https://${{ secrets.GITHUB_TOKEN}}@github.com/${{ github.repository }}.git"
+                  git fetch gh-token
+                  git checkout gh-pages 2>/dev/null || git checkout -b gh-pages
             - name: Set up Node
               uses: actions/setup-node@v1
               with:
@@ -20,15 +27,10 @@ jobs:
               run: |
                   npm install
                   npm run build --if-present
-            - name: Deploy website
+            - name: Clean branch and push
               run: |
-                  git config user.name "robalaban"
-                  git config user.email "${{ secrets.GH_MAIL }}"
-                  git remote add gh-token "https://${{ secrets.GITHUB_TOKEN}}@github.com/${{ github.repository }}.git"
-                  git fetch gh-token
-                  git checkout gh-pages 2>/dev/null || git checkout -b gh-pages
                   shopt -s extglob
-                  rm -r !("build")
+                  rm -r !("build"|"CNAME")
                   git add .
                   git commit -m 'Updating website'
                   git push gh-token gh-pages
