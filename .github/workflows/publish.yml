@@ -28,6 +28,8 @@ jobs:
                   git remote add gh-token "https://${{ secrets.GITHUB_TOKEN}}@github.com/${{ github.repository }}.git"
                   git fetch gh-token
                   git checkout gh-pages 2>/dev/null || git checkout -b gh-pages
-                  git add .
+                  shopt -s extglob
+                  rm -r !("build")
+                  git add build -f
                   git commit -m 'Updating website'
                   git push gh-token gh-pages
