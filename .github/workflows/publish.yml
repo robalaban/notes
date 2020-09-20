@@ -20,8 +20,8 @@ jobs:
             - run: npm run build --if-present
               env:
                   CI: true
+            working-directory: ./build
             - name: Deploy Website
-                working-directory: ./build
                 run: |
                     git config user.name ${{ secrets.GH_USER }}
                     git config user.email "${{ secrets.GH_MAIL }}"
