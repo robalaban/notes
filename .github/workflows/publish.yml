@@ -1,0 +1,30 @@
+name: Build website and publish
+
+on:
+    push:
+      branches:
+      - master
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "12.x"
+            - name: Install dependencies and build
+            - run: npm install
+            - run: npm run build --if-present
+              env:
+                  CI: true
+            - name: Deploy Website
+                working-directory: ./build
+                run: |
+                    git config user.name ${{ secrets.GH_USER }}
+                    git config user.email "${{ secrets.GH_MAIL }}"
+                    git remote add gh-token "https://${{ secrets.GH_TOKEN}}@github.com/:user/:repo.git"
+                    git fetch gh-token && git fetch gh-token gh-pages:gh-pages
+                    git push gh-token gh-pages
