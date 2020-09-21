@@ -4,11 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
+            Robert Balaban
             
-                
                 -
                 Building my personal website
-            
             
         </title>
         <meta name="description" content="">
@@ -47,15 +46,17 @@
 
 <main id="main" tabindex="-1">
 
-    <article id="container-centre">
+    <article class="article" id="container-centre">
 
-        <div>
+        <div class="article__meta">
 
-            <header>
+            <header class="article__title">
                 <h2>Building my personal website</h2>
             </header>
 
-            
+            <time class="article__date" datetime="Sat Sep 19 2020 00:00:00 GMT+0000 (Coordinated Universal Time)">
+                19th September, 2020
+            </time>
 
         </div>
 
@@ -73,16 +74,17 @@
 <li><a href="https://native-elements.dev/">Native Elements</a> - HTML Components</li>
 <li><a href="https://www.11ty.dev/">Eleventy</a> - Static Site Generator</li>
 </ul>
-<p>Now that I have chosen and am pretty happy with the stack, I had to find out why build something from the ground up, and not use an existing framework / starter template? The answer was quite simple: <em>I want to make the website as user friendly as possible.</em> Things that are important to me:</p>
+<p>Now that I have chosen and am pretty happy with the stack, I had to find out why build something from the ground up. Why not just use an existing framework / starter template? The answer was quite simple: <em>I want to make the website as user friendly as possible.</em> Things that are important to me:</p>
 <ul>
 <li>Accessability ( fonts, colors, navigation )</li>
 <li>Quick build time ( The turnaround time needs to be fast )</li>
-<li>Serverless ( I don't want to have any dependencies )</li>
+<li>Serverless ( I don't want to have any overhead )</li>
 </ul>
 <h3>Setting up the environment</h3>
-<pre><code>mkdir Notes &amp;&amp; cd Notes
-npm init -y
-</code></pre>
+<pre class="language-shell"><code class="language-shell"><span class="token function">mkdir</span> Notes <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> Notes<br><span class="token function">npm</span> init -y<br><br><span class="token comment"># Install requiered npm packages</span><br><span class="token function">npm</span> <span class="token function">install</span> snowpack postcss @11ty/eleventy @native-elements/core</code></pre>
+<p>Great! Now that we have the basic building blocks we can look at creating our directories and files that will populate our website. But before we get into that we need to set up snowpack and tell it where to look for our files to build. If like me you haven't tried Snowpack, I suggest you skim through the official docs <a href="https://www.snowpack.dev/#config-files">here</a> or just follow along.</p>
+<pre class="language-js"><code class="language-js"><span class="token comment">// .eleventy.js</span><br><br>module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>    <span class="token comment">// Layout aliases</span><br>    eleventyConfig<span class="token punctuation">.</span><span class="token function">addLayoutAlias</span><span class="token punctuation">(</span><span class="token string">"default"</span><span class="token punctuation">,</span> <span class="token string">"layouts/default.njk"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">return</span> <span class="token punctuation">{</span><br>        templateFormats<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"md"</span><span class="token punctuation">,</span> <span class="token string">"njk"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>        markdownTemplateEngine<span class="token operator">:</span> <span class="token string">"njk"</span><span class="token punctuation">,</span><br>        htmlTemplateEngine<span class="token operator">:</span> <span class="token string">"njk"</span><span class="token punctuation">,</span><br>        passthroughFileCopy<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span><br><br>        dir<span class="token operator">:</span> <span class="token punctuation">{</span><br>            input<span class="token operator">:</span> <span class="token string">"site"</span><span class="token punctuation">,</span><br>            output<span class="token operator">:</span> <span class="token string">"_output"</span><span class="token punctuation">,</span><br>            includes<span class="token operator">:</span> <span class="token string">"includes"</span><span class="token punctuation">,</span><br>        <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">}</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>The above is a <em>very</em> minimal setup for 11ty it basically says to look into the <code>site</code> directory and watch the file formats <code>md &amp; njk</code>. The resulting output after parsing will go into the <code>_output</code> folder.</p>
 
 
         </div>
