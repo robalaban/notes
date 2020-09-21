@@ -5,19 +5,17 @@ layout: default
 {# Note Layout #}
 <main id="main" tabindex="-1">
 
-    <article id="container-centre">
+    <article class="article" id="container-centre">
 
-        <div>
+        <div class="article__meta">
 
-            <header>
+            <header class="article__title">
                 <h2>{{ title }}</h2>
             </header>
 
-            {# <div>
-                <time datetime="{{ date }}">
-                    {{ date }}
-                </time>
-            </div> #}
+            <time class="article__date" datetime="{{ date }}">
+                {{ date | dateDisplay }}
+            </time>
 
         </div>
 

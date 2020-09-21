@@ -19,15 +19,44 @@ However, I still found myself thinking of what my _"corner"_ of the web would lo
 -   [Native Elements](https://native-elements.dev/) - HTML Components
 -   [Eleventy](https://www.11ty.dev/) - Static Site Generator
 
-Now that I have chosen and am pretty happy with the stack, I had to find out why build something from the ground up, and not use an existing framework / starter template? The answer was quite simple: _I want to make the website as user friendly as possible._ Things that are important to me:
+Now that I have chosen and am pretty happy with the stack, I had to find out why build something from the ground up. Why not just use an existing framework / starter template? The answer was quite simple: _I want to make the website as user friendly as possible._ Things that are important to me:
 
 -   Accessability ( fonts, colors, navigation )
 -   Quick build time ( The turnaround time needs to be fast )
--   Serverless ( I don't want to have any dependencies )
+-   Serverless ( I don't want to have any overhead )
 
 ### Setting up the environment
 
-```
+```shell
 mkdir Notes && cd Notes
 npm init -y
+
+# Install requiered npm packages
+npm install snowpack postcss @11ty/eleventy @native-elements/core
 ```
+
+Great! Now that we have the basic building blocks we can look at creating our directories and files that will populate our website. But before we get into that we need to set up snowpack and tell it where to look for our files to build. If like me you haven't tried Snowpack, I suggest you skim through the official docs [here](https://www.snowpack.dev/#config-files) or just follow along.
+
+```js
+// .eleventy.js
+
+module.exports = (eleventyConfig) => {
+    // Layout aliases
+    eleventyConfig.addLayoutAlias("default", "layouts/default.njk");
+
+    return {
+        templateFormats: ["md", "njk"],
+        markdownTemplateEngine: "njk",
+        htmlTemplateEngine: "njk",
+        passthroughFileCopy: true,
+
+        dir: {
+            input: "site",
+            output: "_output",
+            includes: "includes",
+        },
+    };
+};
+```
+
+The above is a _very_ minimal setup for 11ty it basically says to look into the `site` directory and watch the file formats `md & njk`. The resulting output after parsing will go into the `_output` folder.
