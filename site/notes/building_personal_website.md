@@ -1,5 +1,6 @@
 ---
 title: Building my personal website
+excerpt: Detailed view on building a modern, statically generated website with 11ty, Snowpack deployed to Github Pages with the help of Github Actions
 date: 2020-09-19
 tags:
     - note

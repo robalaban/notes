@@ -1,3 +1,6 @@
 {
-    "name": "Robert Balaban"
+    "name": "Robert Balaban",
+    "images": {
+        "favicon": "/images/favicon.ico"
+    }
 }

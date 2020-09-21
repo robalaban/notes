@@ -1,18 +1,15 @@
 ---
 layout: default
-title: Welcome
+title: Thoughts and ramblings about software and data 
 ---
 
 {% include "partials/intro.njk" %}
 
-<h3>
-    Latest Notes
-</h3>
-
-<ul>
-    {%- for note in collections.note -%}
-        <li>
-            <a href="{{ note.url }}">{{ note.data.title }}</a>
-        </li>
-    {%- endfor -%}
-</ul>
+{%- for note in collections.note -%}
+    <h4>
+        <a href="{{ note.url }}">{{ note.data.title }}</a>
+    </h4>
+    <p>
+        {{ note.data.excerpt }}
+    </p>
+{%- endfor -%}

@@ -1,14 +1,14 @@
 :root {
-    --background-color-highlight: hsl(266, 18%, 26%);
+    --background-color-highlight: #2a2139;
     --ne-global-background: #f9f9f9;
-    --ne-global-foreground: hsl(0, 0%, 0%);
+    --ne-global-foreground: #2a2139;
     --ne-body-font-family: "Lato", sans-serif;
     --ne-root-font-size: 100%;
     --ne-body-font-size: 1.125rem;
     --ne-vertical-leading: 1.6rem;
     --ne-selection-foreground: hsl(0, 0%, 100%);
-    --ne-global-box-sizing: border-box;
     --ne-selection-background: hsl(233, 64%, 72%);
+    --ne-global-box-sizing: border-box;
     --ne-outline-width: 2px;
     --ne-outline-color: hsl(0, 0%, 0%);
     --ne-basic-line-height: 1.8;
@@ -18,9 +18,9 @@
     --ne-cite-font-size: 1rem;
     --ne-cite-start-sign: "—";
     --ne-links-foreground: hsl(266, 18%, 26%);
-    --ne-links-active-foreground: hsl(233, 64%, 52%);
-    --ne-del-foreground: hsl(337, 74%, 31%);
-    --ne-del-background: hsl(0, 100%, 94%);
+    --ne-links-active-foreground: #f92aad;
+    --ne-del-foreground: #f92aad;
+    --ne-del-background: transparent;
     --ne-ins-foreground: hsl(161, 98%, 18%);
     --ne-ins-background: hsl(138, 100%, 88%);
     --ne-kbd-color: hsl(233, 34%, 96%);
@@ -28,7 +28,7 @@
     --ne-mark-foreground: hsl(20, 100%, 26%);
     --ne-mark-background: hsl(57, 100%, 60%);
     --ne-inline-code-border-radius: 2px;
-    --ne-inline-code-background: hsl(220, 10%, 95%);
+    --ne-inline-code-background: #34294f;
     --ne-button-border: 0;
     --ne-button-hover-border: 0;
     --ne-button-active-border: 0;
@@ -180,7 +180,7 @@
     --ne-textfield-font-weight: 700;
     --background-color-darker: hsl(263, 18%, 20%);
     --my-color-1: hsl(263, 18%, 20%);
-    --accent-color: hsl(1, 84%, 75%);
+    --accent-color: #f92aad;
     --my-color-3: hsl(263, 18%, 20%);
     --my-color-4: hsl(265, 12%, 64%);
     --my-color-5: hsl(1, 84%, 75%);
@@ -197,6 +197,11 @@ h4,
 h5,
 h6 {
     font-family: "Karla", sans-serif;
+    color: #34294f;
+}
+
+p code {
+    color: #fdfdfd;
 }
 
 code[class*="language-"],
@@ -225,7 +230,7 @@ pre[class*="language-"] {
 /* Code blocks */
 pre[class*="language-"] {
     padding: 1em;
-    margin: 0.5em 0;
+    margin: 1.5em 0;
     overflow: auto;
 }
 
@@ -301,7 +306,7 @@ pre[class*="language-"] {
 .token.attr-value,
 .token.regex,
 .token.variable {
-    color: #f87c32;
+    color: #67cdcc;
 }
 
 .token.operator,
