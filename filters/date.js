@@ -9,18 +9,18 @@ module.exports = function (date, part) {
         return d.getUTCFullYear();
     }
     var month = [
-        "January",
-        "February",
+        "Jan",
+        "Feb",
         "March",
         "April",
         "May",
         "June",
         "July",
         "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
     ];
     var ordinal = {
         1: "st",

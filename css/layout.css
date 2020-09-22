@@ -8,7 +8,7 @@
 .header {
     display: flex;
     justify-content: flex-end;
-    margin: 1.6rem 2.4rem 2.4rem 2.4rem;
+    margin: 2.6rem;
 }
 
 .intro {
@@ -19,4 +19,17 @@
 
 .article__meta {
     margin-bottom: 4.2rem;
+}
+
+/* Notes */
+
+.notes__single {
+    margin-bottom: 1.5rem;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    margin: 4.2rem 0;
 }

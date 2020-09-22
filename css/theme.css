@@ -5,7 +5,7 @@
     --ne-body-font-family: "Lato", sans-serif;
     --ne-root-font-size: 100%;
     --ne-body-font-size: 1.125rem;
-    --ne-vertical-leading: 1.6rem;
+    --ne-vertical-leading: 1.125rem;
     --ne-selection-foreground: hsl(0, 0%, 100%);
     --ne-selection-background: hsl(233, 64%, 72%);
     --ne-global-box-sizing: border-box;

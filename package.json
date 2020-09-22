@@ -20,6 +20,7 @@
   "homepage": "https://github.com/robalaban/notes#readme",
   "dependencies": {
     "@native-elements/core": "^1.4.1",
+    "postcss-autoreset": "^2.0.2",
     "postcss-modules": "^3.2.2"
   },
   "devDependencies": {

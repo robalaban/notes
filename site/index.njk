@@ -5,11 +5,15 @@ title: Thoughts and ramblings about software and data
 
 {% include "partials/intro.njk" %}
 
-{%- for note in collections.note -%}
-    <h4>
-        <a href="{{ note.url }}">{{ note.data.title }}</a>
-    </h4>
-    <p>
-        {{ note.data.excerpt }}
-    </p>
-{%- endfor -%}
+<div class="notes__container">
+    {%- for note in collections.note -%}
+        <div class="notes__single">
+            <h4>
+                <a href="{{ note.url }}">{{ note.data.title }}</a>
+            </h4>
+            <p>
+                {{ note.data.excerpt }}
+            </p>
+        </div>
+    {%- endfor -%}
+</div>
