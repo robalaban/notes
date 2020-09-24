@@ -33,3 +33,13 @@
     text-align: center;
     margin: 4.2rem 0;
 }
+
+/* Toast */
+
+.toast__notification {
+    text-align: center;
+    background-color: transparent !important;
+    background-image: linear-gradient(to bottom, #2a2139 75%, #34294f);
+    padding: 0.3em;
+    color: #fdfdfd;
+}

@@ -60,4 +60,44 @@ module.exports = (eleventyConfig) => {
 };
 ```
 
-The above is a _very_ minimal setup for 11ty it basically says to look into the `site` directory and watch the file formats `md & njk`. The resulting output after parsing will go into the `_output` folder.
+The above is a _very_ minimal setup for 11ty it basically says to look into the `site` directory and watch the file formats `md & njk`. The resulting output after parsing will go into the `_output` folder. However, in order to make this work we need some sort of bundler to aid in the process - for this I have chosen to go with [Snowpack](https://www.snowpack.dev/). Snowpack uses `snowpack.config.json` for its configuration, lets quickly take a look at it.
+
+```json
+// snowpack.config.json
+
+{
+    "mount": {
+        "_output": "/",
+        "src": "/_dist_"
+    },
+    "plugins": [
+        [
+            "@snowpack/plugin-run-script",
+            {
+                "cmd": "eleventy", // production build
+                "watch": "$1 --watch" // dev
+            }
+        ],
+        "@snowpack/plugin-postcss"
+    ]
+}
+```
+
+First we can see some plugins you can go ahead and install them using npm: `npm i @snowpack/plugin-run-script @snowpack/plugin-postcss` these plugins further extend snowpacks configuration and allow us to use postcss for our css. The run script plugin pipes down information on `dev` and `production` builds. With that being said, lets also quickly look at the PostCSS config.
+
+```js
+//postcss.config.js
+
+module.exports = {
+    plugins: [
+        require("postcss-easy-import"),
+        require("postcss-preset-env")({ stage: 3 }),
+    ],
+};
+```
+
+PostCSS API is rather simple - but I do suggest you head over the official docs and take a look at what is possible (hint a lot). Now that we have the 3 main config files up and running we can simply start our dev server using: `npm run snowpack dev` or alternatively create a `start` script in `package.json`. This will open a HTTP server on port 80, Snowpack is doing this for us, as well as watch and hot-reload from the site folder.
+
+### Eleventy goodies - templates, filters
+
+The boring configuration is out of the way. Lets explore what 11ty has to offer, and understand how we can use templates to structure our website.
