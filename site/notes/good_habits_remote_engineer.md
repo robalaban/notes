@@ -1,5 +1,5 @@
 ---
-title: 🚧 - Creating good habbits as a remote engineer
+title: 🚧 - Creating good habits as a remote engineer
 excerpt: A brief talk about productivity, mental health and workplace culture in the era of remote work - as seen through the eyes of an engineer
 date: 2020-09-21
 tags:
