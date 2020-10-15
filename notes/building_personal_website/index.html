@@ -33,8 +33,12 @@
   ⚠️ Website under very much construction!
 </section>
 
-        <header class="header">
+        
+
+<header class="header">
   <nav class="navigation">
+    
+      <a class="navigation__item" href="/curriculum/">Curriculum</a>
     
       <a class="navigation__item" href="/">Home</a>
     
@@ -94,7 +98,7 @@
 <pre class="language-js"><code class="language-js"><span class="token comment">//postcss.config.js</span><br><br>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span><br>    plugins<span class="token operator">:</span> <span class="token punctuation">[</span><br>        <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postcss-easy-import"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>        <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postcss-preset-env"</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span> stage<span class="token operator">:</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>    <span class="token punctuation">]</span><span class="token punctuation">,</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>PostCSS API is rather simple - but I do suggest you head over the official docs and take a look at what is possible (hint a lot). Now that we have the 3 main config files up and running we can simply start our dev server using: <code>npm run snowpack dev</code> or alternatively create a <code>start</code> script in <code>package.json</code>. This will open a HTTP server on port 80, Snowpack is doing this for us, as well as watch and hot-reload from the site folder.</p>
 <h3>Eleventy goodies - templates, filters</h3>
-<p>The boring configuration is out of the way. Lets explore what 11ty has to offer, and understand how we can use templates to structure our website.</p>
+<p>The boring configuration is out of the way. Lets explore what 11ty has to offer, and understand how we can use templates to structure our website. One of the reason I chose to go with 11ty is that it allowed me to make a choice on what templting engine I could use. Each individual blog post or &quot;note&quot; as I call them are written in Markdown, however all the other pages use Nunjucks templating from Mozilla. This gives the developer the opportunity to sepaate</p>
 
 
         </div>
