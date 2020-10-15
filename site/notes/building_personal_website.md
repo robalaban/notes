@@ -100,4 +100,4 @@ PostCSS API is rather simple - but I do suggest you head over the official docs 
 
 ### Eleventy goodies - templates, filters
 
-The boring configuration is out of the way. Lets explore what 11ty has to offer, and understand how we can use templates to structure our website.
+The boring configuration is out of the way. Lets explore what 11ty has to offer, and understand how we can use templates to structure our website. One of the reason I chose to go with 11ty is that it allowed me to make a choice on what templting engine I could use. Each individual blog post or "note" as I call them are written in Markdown, however all the other pages use Nunjucks templating from Mozilla. This gives the developer the opportunity to sepaate
