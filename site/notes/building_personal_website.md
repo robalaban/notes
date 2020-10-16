@@ -98,6 +98,18 @@ module.exports = {
 
 PostCSS API is rather simple - but I do suggest you head over the official docs and take a look at what is possible (hint a lot). Now that we have the 3 main config files up and running we can simply start our dev server using: `npm run snowpack dev` or alternatively create a `start` script in `package.json`. This will open a HTTP server on port 80, Snowpack is doing this for us, as well as watch and hot-reload from the site folder.
 
-### Eleventy goodies - templates, filters
+### Eleventy goodies - templates, plugins, filters
 
-The boring configuration is out of the way. Lets explore what 11ty has to offer, and understand how we can use templates to structure our website. One of the reason I chose to go with 11ty is that it allowed me to make a choice on what templting engine I could use. Each individual blog post or "note" as I call them are written in Markdown, however all the other pages use Nunjucks templating from Mozilla. This gives the developer the opportunity to sepaate
+Now that the configuration is out of the way. Lets explore what 11ty has to offer.
+
+#### Templates
+
+One of the reason I chose to go with 11ty is that it allowed me to make a choice on what templting engine I could use. Each individual blog post or "note" as I call them are written in Markdown, however all the other pages use Nunjucks templating from Mozilla. This gives the developer the opportunity to separate logic in `layouts` and `partials`.
+
+#### Plugins
+
+Nobody loves a well maintained pluging eco-system more than me, and have to say after using 11ty for my blog - it not only delivered but it did so above expectations. Plugins are maintained on their official website [here](https://www.11ty.dev/docs/plugins/). And adding plugins to the config is really simple. For my website I'm using the official [Navigation](https://www.11ty.dev/docs/plugins/navigation/) plugin to use font-matter to generate the navigation menu. I won't go into implementation details as their readme does a fantastic job to get everyone up and running.
+
+#### Filters
+
+Not going to lie, I absolutley love this feature and can't wait to explore and come up with some crazy implementations. In short, filters are functions which can be applied to variables in Nunjucks templates the current usecase I have found for them is to parse the datestring in my posts and convert it to an easier to read format. The documentation for filters can be found [here](https://www.11ty.dev/docs/filters/).
