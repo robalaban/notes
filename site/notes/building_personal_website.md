@@ -1,5 +1,5 @@
 ---
-title: 🚧 - Building my personal website
+title: Building my personal website
 excerpt: Detailed view on building a modern, statically generated website with 11ty, Snowpack deployed to Github Pages with the help of Github Actions
 date: 2020-09-19
 tags:
@@ -100,7 +100,7 @@ PostCSS API is rather simple - but I do suggest you head over the official docs 
 
 ### Eleventy goodies - templates, plugins, filters
 
-Now that the configuration is out of the way. Lets explore what 11ty has to offer.
+Now that the configuration is out of the way. Lets explore some of the features 11ty has to offer.
 
 #### Templates
 
