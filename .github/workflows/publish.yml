@@ -17,18 +17,10 @@ jobs:
                   npm install
                   npm run build
 
-            - name: Disable command workflow processing
-              run: |
-                  echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
-
             - name: Deploy 🚀
-              uses: JamesIves/github-pages-deploy-action@3.6.1
+              uses: JamesIves/github-pages-deploy-action@3.7.1
               with:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   BRANCH: gh-pages
                   FOLDER: build
                   CLEAN: true
-
-            - name: Enable command workflow processing
-              run: |
-                  echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
