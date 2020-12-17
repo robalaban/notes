@@ -1,0 +1,51 @@
+#wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1.6rem;
+}
+
+.intro {
+    margin-bottom: 4.2rem;
+}
+
+/* Article */
+
+.article__meta {
+    margin-bottom: 4.2rem;
+}
+
+/* Notes */
+
+.notes__single {
+    margin-bottom: 1.5rem;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    margin: 4.2rem 0;
+}
+
+/* Toast */
+
+.toast__notification {
+    text-align: center;
+    background-color: transparent !important;
+    background-image: linear-gradient(to bottom, #2a2139 75%, #34294f);
+    padding: 0.3em;
+    color: #fdfdfd;
+}
+
+@media only screen and (max-width: 980px) {
+    #wrapper {
+        margin: 0 1.6rem;
+    }
+}
