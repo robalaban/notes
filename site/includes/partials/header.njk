@@ -1,11 +1,11 @@
 {% set navPages = collections.all | eleventyNavigation %}
 
 <header class="header">
-  <nav class="navigation">
+  <nav class="whitespace-nowrap mx-auto xl:mx-0 px-4 sm:px-6 md:px-8 xl:px-0 flex space-x-2 sm:space-x-6">
     {% for item in navPages %}
-      <a class="navigation__item" href="{{ item.url | url }}">{{ item.title }}</a>
+      <a class="block w-full relative z-10 px-4 py-1 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 hover:text-gray-900 rounded-full text-gray-400" href="{{ item.url | url }}">{{ item.title }}</a>
     {% endfor %}
-    <a class="navigation__item" rel="noreferrer" href="https://github.com/robalaban" target="_blank">Github</a>
-    <a class="navigation__item" rel="noreferrer" href="https://www.linkedin.com/in/robalaban/" target="_blank">LinkedIn</a>
+    <a class="block w-full relative z-10 px-4 py-1 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 hover:text-gray-900 rounded-full text-gray-400" rel="noreferrer" href="https://github.com/robalaban" target="_blank">Github</a>
+    <a class="block w-full relative z-10 px-4 py-1 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 hover:text-gray-900 rounded-full text-gray-400" rel="noreferrer" href="https://www.linkedin.com/in/robalaban/" target="_blank">LinkedIn</a>
   </nav>
 </header>

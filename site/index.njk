@@ -8,13 +8,15 @@ eleventyNavigation:
 
 {% include "partials/intro.njk" %}
 
-<div class="notes__container">
+<div class="mx-auto max-w-4xl">
     {%- for note in collections.note -%}
-        <div class="notes__single">
-            <h4>
-                <a href="{{ note.url }}">{{ note.data.title }}</a>
-            </h4>
-            <p>
+        <div class="mb-6">
+            <div class="font-extrabold text-2xl mb-4">
+                <h3 class="bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-pink-500">
+                    <a href="{{ note.url }}">{{ note.data.title }}</a>
+                </h3>
+            </div>
+            <p class="leading-normal text-gray-400">
                 {{ note.data.excerpt }}
             </p>
         </div>
