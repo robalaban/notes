@@ -1,7 +1,7 @@
 {
   "name": "notes",
   "version": "0.0.1",
-  "description": "Personal website built with e11y",
+  "description": "Personal website",
   "main": "index.js",
   "scripts": {
     "start": "snowpack dev",
