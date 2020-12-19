@@ -3,44 +3,33 @@ layout: default
 ---
 
 {# Note Layout #}
-<main id="main" tabindex="-1">
+<section>
 
-    <article class="article" id="container-centre">
+    <div class="article__meta">
+        <header class="article__title">
+            <h2>{{ title }}</h2>
+        </header>
+        <time class="article__date" datetime="{{ date }}">
+            {{ date | dateDisplay }}
+        </time>
+    </div>
 
-        <div class="article__meta">
-
-            <header class="article__title">
-                <h2>{{ title }}</h2>
-            </header>
-
-            <time class="article__date" datetime="{{ date }}">
-                {{ date | dateDisplay }}
-            </time>
-
-        </div>
-
-        <div>
-
-            {{ content | safe }}
-
-        </div>
-
-        <div>
-
-            <div>
-                {% if prevPost %}
-                    <p>
-                        <a href="{{ prevPost.url }}">{{ prevPost.data.title }}</a>
-                    </p>
-                {% endif %}
-                {% if nextPost %}
-                    <p>
-                        <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
-                    </p>
-                {% endif %}
-            </div>
-        </div>
-
+    <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto prose-pink">
+        {{ content | safe }}
     </article>
 
-</main>
+    <div>
+        <div>
+            {% if prevPost %}
+                <p>
+                    <a href="{{ prevPost.url }}">{{ prevPost.data.title }}</a>
+                </p>
+            {% endif %}
+            {% if nextPost %}
+                <p>
+                    <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</section>
