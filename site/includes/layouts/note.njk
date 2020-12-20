@@ -3,33 +3,29 @@ layout: default
 ---
 
 {# Note Layout #}
-<section>
+<article class="prose prose-pink sm:prose sm:prose-pink lg:prose-lg lg:prose-pink xl:prose-2xl xl:prose-pink mx-auto px-4 md:px-0">
 
-    <div class="article__meta">
-        <header class="article__title">
-            <h2>{{ title }}</h2>
-        </header>
+    <header>
+        <h2>{{ title }}</h2>
         <time class="article__date" datetime="{{ date }}">
             {{ date | dateDisplay }}
         </time>
-    </div>
+    </header>
 
-    <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto prose-pink">
+    <section>
         {{ content | safe }}
-    </article>
+    </section>
 
-    <div>
-        <div>
-            {% if prevPost %}
-                <p>
-                    <a href="{{ prevPost.url }}">{{ prevPost.data.title }}</a>
-                </p>
-            {% endif %}
-            {% if nextPost %}
-                <p>
-                    <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
-                </p>
-            {% endif %}
-        </div>
-    </div>
-</section>
+    <footer class="grid grid-cols-2 gap-4">
+        {% if prevPost %}
+            <figure class="bg-gray-100 rounded-xl p-8 col-start-1">
+                <a href="{{ prevPost.url }}">{{ prevPost.data.title }}</a>
+            </figure>
+        {% endif %}
+        {% if nextPost %}
+            <figure class="bg-gray-100 rounded-xl p-8 col-start-2">
+                <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+            </figure>
+        {% endif %}
+    </footer>
+</article>
