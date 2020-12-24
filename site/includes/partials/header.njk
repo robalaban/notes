@@ -1,9 +1,9 @@
 {% set navPages = collections.all | eleventyNavigation %}
 
-<header class="mx-auto lg:py-12 md:py-8 py-6 max-w-7xl flex justify-center items-center">
+<header class="mx-auto lg:py-12 md:py-8 py-6 max-w-7xl flex justify-start items-center px-4 xl:px-0">
   <nav>
     {% for item in navPages %}
-      <a class="px-4 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 hover:text-gray-900 text-gray-400" href="{{ item.url | url }}">{{ item.title }}</a>
+      <a class="pr-4 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 hover:text-gray-900 text-gray-400" href="{{ item.url | url }}">{{ item.title }}</a>
     {% endfor %}
     <a class="px-4 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 hover:text-gray-900 text-gray-400" rel="noreferrer" href="https://github.com/robalaban" target="_blank">Github</a>
     <a class="px-4 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 hover:text-gray-900 text-gray-400" rel="noreferrer" href="https://www.linkedin.com/in/robalaban/" target="_blank">LinkedIn</a>

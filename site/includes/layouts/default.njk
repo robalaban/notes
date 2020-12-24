@@ -26,12 +26,12 @@
         <link rel="canonical" href="{{ site.url }}{{ page.url }}">
     </head>
 
+    {% include "partials/header.njk" %}
+
     {# bg-gray-900 text-gray-400 #}
     <body class="" {% if body_class %} id="{{ body_class }}" {% endif %}>
 
         <a class="sr-only" href="#main">Skip to content</a>
-
-        {% include "partials/header.njk" %}
 
         <main class="">
 

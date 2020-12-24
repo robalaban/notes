@@ -3,14 +3,15 @@ layout: default
 ---
 
 {# Note Layout #}
-<article class="prose prose-pink sm:prose sm:prose-pink lg:prose-lg lg:prose-pink xl:prose-2xl xl:prose-pink mx-auto px-4 md:px-0">
 
-    <header>
-        <h2>{{ title }}</h2>
-        <time class="article__date" datetime="{{ date }}">
-            {{ date | dateDisplay }}
-        </time>
-    </header>
+<section class="mx-auto lg:py-10 md:py-8 py-6 max-w-7xl flex flex-col justify-start prose lg:prose-lg xl:prose-2xl px-4 xl:px-0">
+    <h1>{{ title }}</h1>
+    <time class="article__date" datetime="{{ date }}">
+        {{ date | dateDisplay }}
+    </time>
+</section>
+
+<article class="prose prose-pink sm:prose sm:prose-pink lg:prose-lg lg:prose-pink xl:prose-2xl xl:prose-pink mx-auto px-4 md:px-0">
 
     <section>
         {{ content | safe }}
@@ -19,11 +20,13 @@ layout: default
     <footer class="grid grid-cols-2 gap-4">
         {% if prevPost %}
             <figure class="bg-gray-100 rounded-xl p-8 col-start-1">
+                <p class="text-gray-500">Previous article</p>
                 <a href="{{ prevPost.url }}">{{ prevPost.data.title }}</a>
             </figure>
         {% endif %}
         {% if nextPost %}
             <figure class="bg-gray-100 rounded-xl p-8 col-start-2">
+                <p class="text-gray-500">Next article</p>
                 <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
             </figure>
         {% endif %}
