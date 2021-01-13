@@ -3,12 +3,27 @@
         "_output": "/",
         "src": "/_dist_"
     },
+    "install": [
+        "alpinejs"
+    ],
     "plugins": [
         [
             "@snowpack/plugin-run-script",
             {
                 "cmd": "eleventy",
                 "watch": "$1 --watch"
+            }
+        ],
+        [
+            "@snowpack/plugin-babel",
+            {
+                "input": [
+                    ".js",
+                    ".mjs",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
             }
         ],
         "@snowpack/plugin-postcss"

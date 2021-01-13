@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="min-h-full antialiased">
+<html lang="en" class="min-h-full antialiased dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,9 @@
 
         <link rel="stylesheet" href="/css/main.css">
 
+        <script src="/js/alpine.js?v=2.8.0"></script>
+        <script src="/js/main.js" defer="defer"></script>
+
         {# lastly include favicon, fonts, etc #}
         <link rel="icon" type="image/png" href="{{ site.images.favicon }}">
 
@@ -29,7 +32,7 @@
     {% include "partials/header.njk" %}
 
     {# bg-gray-900 text-gray-400 #}
-    <body class="" {% if body_class %} id="{{ body_class }}" {% endif %}>
+    <body class="dark:bg-gray-800 dark:text-gray-300" {% if body_class %} id="{{ body_class }}" {% endif %}>
 
         <a class="sr-only" href="#main">Skip to content</a>
 

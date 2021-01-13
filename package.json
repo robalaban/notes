@@ -2,7 +2,6 @@
   "name": "notes",
   "version": "0.0.2",
   "description": "Personal website built with e11y",
-  "main": "index.js",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
@@ -19,17 +18,19 @@
   },
   "homepage": "https://github.com/robalaban/notes#readme",
   "dependencies": {
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "@tailwindcss/typography": "^0.3.1",
+    "alpinejs": "^2.8.0",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",
     "postcss-autoreset": "^2.0.2",
-    "postcss-modules": "^3.2.2"
+    "postcss-modules": "^3.2.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
     "@11ty/eleventy-navigation": "^0.1.6",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+    "@snowpack/plugin-babel": "^2.1.5",
     "@snowpack/plugin-postcss": "^1.0.4",
     "@snowpack/plugin-run-script": "^2.1.2",
     "postcss-cli": "^7.1.2",
