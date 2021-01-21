@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="min-h-full antialiased dark">
+<html x-data="theme()" lang="en" class="min-h-full antialiased" :class="themeClass">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@
     {% include "partials/header.njk" %}
 
     {# bg-gray-900 text-gray-400 #}
-    <body class="dark:bg-gray-800 dark:text-gray-300" {% if body_class %} id="{{ body_class }}" {% endif %}>
+    <body class="dark:bg-gray-800 dark:text-gray-300 text-gray-700" {% if body_class %} id="{{ body_class }}" {% endif %}>
 
         <a class="sr-only" href="#main">Skip to content</a>
 
