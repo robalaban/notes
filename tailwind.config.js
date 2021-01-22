@@ -98,6 +98,12 @@ module.exports = {
                         h3: {
                             color: "white",
                             "margin-top": "0",
+                            a: {
+                                "&:hover, &.active": {
+                                    "text-decoration": "none",
+                                    color: theme("colors.pink.500"),
+                                },
+                            },
                         },
                         h4: {
                             color: "white",
