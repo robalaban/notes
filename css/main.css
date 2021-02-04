@@ -1,3 +1,22 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+:root {
+    --main-bg-color: #f9fafb;
+    --main-text-color: @apply text-gray-700;
+    --main-accent-color: @apply bg-pink-600;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+}
+
+main a {
+    color: var(--main-accent-color);
+}
+
+.intro {
+    background-color: var(--main-accent-color);
+}
