@@ -15,6 +15,12 @@ On startup vs contracting.
 
 I quit my day job back in December 2020, I took some time off and quickly realised I had to support myself if I was going to make my dream come true. There are generally two ways of approaching this:
 
--   Contracting, leverage your network and apply your skills
+-   Contracting
+
+It makes sense,
+
+The danger of contracting, welcoming the loop. On a day to day basis there isn't much difference between a standard full-time employee and a contractor. You still have to show up, put in the work, and sometimes ( take the work back home with you ), stress is mostly the same if not higher. Companies expect a bit more from contractors than regular employees, atleast that has been my experience so far.
+
+So - there comes a point where we have to make a choice
 
 to get contracts to support myself ( this whole startup thing would have been )
