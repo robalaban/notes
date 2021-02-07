@@ -1,10 +1,57 @@
-@import "./reset.css";
-@import "@native-elements/core";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import "./typography.css";
-@import "./theme.css";
-@import "./utility.css";
+:root {
+    --main-bg-color: #f9fafb;
+    --main-bg-color-accent: @apply bg-gray-100;
 
-/* Custom CSS */
+    --main-text-color: @apply text-gray-700;
 
-@import "./layout.css";
+    --main-accent-color: @apply bg-pink-500;
+    --main-accent-color-dark: @apply bg-pink-600;
+    --main-accent-color-darker: @apply bg-pink-700;
+
+    --secondary-accent-color: @apply bg-gray-700;
+    --secondary-accent-color-dark: @apply bg-gray-800;
+
+    --intro-to: @apply bg-pink-500;
+    --intro-to-opacity: rgba(236, 72, 153, 0);
+    --intro-from: @apply bg-pink-600;
+}
+
+::-moz-selection { 
+    background: rgba(236, 72, 153, 0.8);
+}
+
+::selection { 
+    background: rgba(236, 72, 153, 0.8);
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+}
+
+main a {
+    color: var(--main-accent-color);
+}
+
+.intro {
+    --gradient-stops: var(--intro-from), var(--intro-to, var(--intro-to-opacity));
+    background-image: linear-gradient(to bottom right, var(--gradient-stops));
+    background-color: var(--main-accent-color-dark);
+}
+
+.intro-wave {
+    background-color: var(--main-accent-color-darker);
+}
+
+.intro-disclaimer {
+    background-color: var(--main-accent-color-dark);
+}
+
+
+.article-footer-figure {
+    background-color: var(--main-bg-color-accent);
+}

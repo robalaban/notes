@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="min-h-full antialiased">
+<html x-data="theme()" lang="en" class="min-h-full antialiased" :class="themeClass">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,29 +18,31 @@
         {% endif %}
 
         <link rel="stylesheet" href="/css/main.css">
-        <script src="/js/main.js" defer="defer"></script>
+
+        <script src="/js/alpine.js?v=2.8.0"></script>
 
         {# lastly include favicon, fonts, etc #}
         <link rel="icon" type="image/png" href="{{ site.images.favicon }}">
 
         {# canonical #}
         <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+        <script src="/js/main.js"></script>
     </head>
 
-    <body {% if body_class %} id="{{ body_class }}" {% endif %}>
+    {% include "partials/header.njk" %}
+
+    {# bg-gray-900 text-gray-400 #}
+    <body class=" dark:text-gray-300 text-gray-700" {% if body_class %} id="{{ body_class }}" {% endif %}>
 
         <a class="sr-only" href="#main">Skip to content</a>
 
-        {% include "partials/toast.njk" %}
-
-        {% include "partials/header.njk" %}
-
-        <div id="wrapper">
+        <main class="">
 
             {# include content #}
             {{ content | safe }}
 
-        </div>
+        </main>
 
         {% include "partials/footer.njk" %}
 

@@ -8,15 +8,13 @@ eleventyNavigation:
 
 {% include "partials/intro.njk" %}
 
-<div class="notes__container">
-    {%- for note in collections.note -%}
-        <div class="notes__single">
-            <h4>
-                <a href="{{ note.url }}">{{ note.data.title }}</a>
-            </h4>
-            <p>
-                {{ note.data.excerpt }}
-            </p>
-        </div>
-    {%- endfor -%}
-</div>
+{%- for note in collections.note -%}
+    <div class="prose sm:prose lg:prose-lg xl:prose-2xl mx-auto mb-6 px-4 max-w-7xl">
+        <h3 class="">
+            <a class="transition-colors duration-300 hover:text-gray-900 dark:text-gray-400" href="{{ note.url }}">{{ note.data.title }}</a>
+        </h3>
+        <p class="dark:text-gray-500">
+            {{ note.data.excerpt }}
+        </p>
+    </div>
+{%- endfor -%}
