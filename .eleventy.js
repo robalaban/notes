@@ -31,6 +31,7 @@ module.exports = (eleventyConfig) => {
 
     eleventyConfig.addPassthroughCopy({
         "./node_modules/alpinejs/dist/alpine.js": "./js/alpine.js",
+        "./js/main.js": "./js/main.js",
     });
 
     // Include assets
