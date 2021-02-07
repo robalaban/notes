@@ -1,5 +1,5 @@
 <!doctype html>
-<html x-data="theme()" lang="en" class="min-h-full antialiased" :class="themeClass">
+<html x-data="theme()" :class="themeClass" lang="en" class="min-h-full antialiased">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,17 +15,14 @@
             <meta name="robots" content="index,follow"/>
         
 
-        <link rel="stylesheet" href="/css/main.css">
-
-        <script src="/js/alpine.js?v=2.8.0"></script>
-
         
         <link rel="icon" type="image/png" href="/images/favicon.ico">
 
         
         <link rel="canonical" href="/notes/building_personal_website/">
 
-        <script src="/js/main.js"></script>
+        <link rel="stylesheet" href="/assets/main.bundle.css">
+        <script src="/assets/main.bundle.js"></script>
     </head>
 
     
@@ -49,8 +46,7 @@
 </header>
 
 
-    
-    <body class=" dark:text-gray-300 text-gray-700" >
+    <body class="dark:text-gray-300 text-gray-700" >
 
         <a class="sr-only" href="#main">Skip to content</a>
 
@@ -62,7 +58,7 @@
 
 <section class="mx-auto lg:py-10 md:py-8 py-6 max-w-7xl flex flex-col justify-start prose lg:prose-lg xl:prose-2xl px-4 xl:px-0 dark:text-gray-600">
     <h1 class="dark:text-gray-200">Building my personal website</h1>
-    <time class="article__date" datetime="Sat Sep 19 2020 03:00:00 GMT+0300 (Eastern European Summer Time)">
+    <time class="article__date" datetime="Sat Sep 19 2020 00:00:00 GMT+0000 (Coordinated Universal Time)">
         19th Sep, 2020
     </time>
 </section>
@@ -90,13 +86,63 @@
 <li>Serverless ( I don't want to have any overhead )</li>
 </ul>
 <h3>Setting up the environment</h3>
-<pre class="language-shell"><code class="language-shell"><span class="token function">mkdir</span> Notes <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> Notes<br><span class="token function">npm</span> init -y<br><br><span class="token comment"># Install requiered npm packages</span><br><span class="token function">npm</span> <span class="token function">install</span> snowpack postcss @11ty/eleventy @native-elements/core</code></pre>
+<pre><code class="language-shell">mkdir Notes &amp;&amp; cd Notes
+npm init -y
+
+# Install requiered npm packages
+npm install snowpack postcss @11ty/eleventy @native-elements/core
+</code></pre>
 <p>Great! Now that we have the basic building blocks we can look at creating our directories and files that will populate our website. But before we get into that we need to set up snowpack and tell it where to look for our files to build. If like me you haven't tried Snowpack, I suggest you skim through the official docs <a href="https://www.snowpack.dev/#config-files">here</a> or just follow along.</p>
-<pre class="language-js"><code class="language-js"><span class="token comment">// .eleventy.js</span><br><br>module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>    <span class="token comment">// Layout aliases</span><br>    eleventyConfig<span class="token punctuation">.</span><span class="token function">addLayoutAlias</span><span class="token punctuation">(</span><span class="token string">"default"</span><span class="token punctuation">,</span> <span class="token string">"layouts/default.njk"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">return</span> <span class="token punctuation">{</span><br>        templateFormats<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"md"</span><span class="token punctuation">,</span> <span class="token string">"njk"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>        markdownTemplateEngine<span class="token operator">:</span> <span class="token string">"njk"</span><span class="token punctuation">,</span><br>        htmlTemplateEngine<span class="token operator">:</span> <span class="token string">"njk"</span><span class="token punctuation">,</span><br>        passthroughFileCopy<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span><br><br>        dir<span class="token operator">:</span> <span class="token punctuation">{</span><br>            input<span class="token operator">:</span> <span class="token string">"site"</span><span class="token punctuation">,</span><br>            output<span class="token operator">:</span> <span class="token string">"_output"</span><span class="token punctuation">,</span><br>            includes<span class="token operator">:</span> <span class="token string">"includes"</span><span class="token punctuation">,</span><br>        <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">}</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">// .eleventy.js
+
+module.exports = (eleventyConfig) =&gt; {
+    // Layout aliases
+    eleventyConfig.addLayoutAlias(&quot;default&quot;, &quot;layouts/default.njk&quot;);
+
+    return {
+        templateFormats: [&quot;md&quot;, &quot;njk&quot;],
+        markdownTemplateEngine: &quot;njk&quot;,
+        htmlTemplateEngine: &quot;njk&quot;,
+        passthroughFileCopy: true,
+
+        dir: {
+            input: &quot;site&quot;,
+            output: &quot;_output&quot;,
+            includes: &quot;includes&quot;,
+        },
+    };
+};
+</code></pre>
 <p>The above is a <em>very</em> minimal setup for 11ty it basically says to look into the <code>site</code> directory and watch the file formats <code>md &amp; njk</code>. The resulting output after parsing will go into the <code>_output</code> folder. However, in order to make this work we need some sort of bundler to aid in the process - for this I have chosen to go with <a href="https://www.snowpack.dev/">Snowpack</a>. Snowpack uses <code>snowpack.config.json</code> for its configuration, lets quickly take a look at it.</p>
-<pre class="language-json"><code class="language-json"><span class="token comment">// snowpack.config.json</span><br><br><span class="token punctuation">{</span><br>    <span class="token property">"mount"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>        <span class="token property">"_output"</span><span class="token operator">:</span> <span class="token string">"/"</span><span class="token punctuation">,</span><br>        <span class="token property">"src"</span><span class="token operator">:</span> <span class="token string">"/_dist_"</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>        <span class="token punctuation">[</span><br>            <span class="token string">"@snowpack/plugin-run-script"</span><span class="token punctuation">,</span><br>            <span class="token punctuation">{</span><br>                <span class="token property">"cmd"</span><span class="token operator">:</span> <span class="token string">"eleventy"</span><span class="token punctuation">,</span> <span class="token comment">// production build</span><br>                <span class="token property">"watch"</span><span class="token operator">:</span> <span class="token string">"$1 --watch"</span> <span class="token comment">// dev</span><br>            <span class="token punctuation">}</span><br>        <span class="token punctuation">]</span><span class="token punctuation">,</span><br>        <span class="token string">"@snowpack/plugin-postcss"</span><br>    <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+<pre><code class="language-json">// snowpack.config.json
+
+{
+    &quot;mount&quot;: {
+        &quot;_output&quot;: &quot;/&quot;,
+        &quot;src&quot;: &quot;/_dist_&quot;
+    },
+    &quot;plugins&quot;: [
+        [
+            &quot;@snowpack/plugin-run-script&quot;,
+            {
+                &quot;cmd&quot;: &quot;eleventy&quot;, // production build
+                &quot;watch&quot;: &quot;$1 --watch&quot; // dev
+            }
+        ],
+        &quot;@snowpack/plugin-postcss&quot;
+    ]
+}
+</code></pre>
 <p>First we can see some plugins you can go ahead and install them using npm: <code>npm i @snowpack/plugin-run-script @snowpack/plugin-postcss</code> these plugins further extend snowpacks configuration and allow us to use postcss for our css. The run script plugin pipes down information on <code>dev</code> and <code>production</code> builds. With that being said, lets also quickly look at the PostCSS config.</p>
-<pre class="language-js"><code class="language-js"><span class="token comment">//postcss.config.js</span><br><br>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span><br>    plugins<span class="token operator">:</span> <span class="token punctuation">[</span><br>        <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postcss-easy-import"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>        <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"postcss-preset-env"</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span> stage<span class="token operator">:</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>    <span class="token punctuation">]</span><span class="token punctuation">,</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="language-js">//postcss.config.js
+
+module.exports = {
+    plugins: [
+        require(&quot;postcss-easy-import&quot;),
+        require(&quot;postcss-preset-env&quot;)({ stage: 3 }),
+    ],
+};
+</code></pre>
 <p>PostCSS API is rather simple - but I do suggest you head over the official docs and take a look at what is possible (hint a lot). Now that we have the 3 main config files up and running we can simply start our dev server using: <code>npm run snowpack dev</code> or alternatively create a <code>start</code> script in <code>package.json</code>. This will open a HTTP server on port 80, Snowpack is doing this for us, as well as watch and hot-reload from the site folder.</p>
 <h3>Eleventy goodies - templates, plugins, filters</h3>
 <p>Now that the configuration is out of the way. Lets explore some of the features 11ty has to offer.</p>
