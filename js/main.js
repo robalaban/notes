@@ -1,3 +1,7 @@
+require('../css/main.css')
+
+import 'alpinejs'
+
 let root = document.documentElement;
 
 const userPrefersDark =
@@ -33,7 +37,7 @@ if (userPrefersDark || localStorage.getItem("themeColor") === "dark") {
     lightTheme()
 }
 
-function theme() {
+window.theme = function() {
     const isDarkTheme =
         localStorage.getItem("themeColor") === "dark" ||
         localStorage.getItem("userThemePreference" === "dark");

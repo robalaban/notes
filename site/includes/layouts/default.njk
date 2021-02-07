@@ -1,5 +1,5 @@
 <!doctype html>
-<html x-data="theme()" lang="en" class="min-h-full antialiased" :class="themeClass">
+<html x-data="theme()" :class="themeClass" lang="en" class="min-h-full antialiased">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,23 +17,19 @@
             <meta name="robots" content="index,follow"/>
         {% endif %}
 
-        <link rel="stylesheet" href="/css/main.css">
-
-        <script src="/js/alpine.js?v=2.8.0"></script>
-
         {# lastly include favicon, fonts, etc #}
         <link rel="icon" type="image/png" href="{{ site.images.favicon }}">
 
         {# canonical #}
         <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
-        <script src="/js/main.js"></script>
+        <link rel="stylesheet" href="/assets/main.bundle.css">
+        <script src="/assets/main.bundle.js"></script>
     </head>
 
     {% include "partials/header.njk" %}
 
-    {# bg-gray-900 text-gray-400 #}
-    <body class=" dark:text-gray-300 text-gray-700" {% if body_class %} id="{{ body_class }}" {% endif %}>
+    <body class="dark:text-gray-300 text-gray-700" {% if body_class %} id="{{ body_class }}" {% endif %}>
 
         <a class="sr-only" href="#main">Skip to content</a>
 
