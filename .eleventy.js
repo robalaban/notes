@@ -26,14 +26,7 @@ module.exports = (eleventyConfig) => {
     // Layout aliases
     eleventyConfig.addLayoutAlias("default", "layouts/default.njk");
     eleventyConfig.addLayoutAlias("post", "layouts/note.njk");
-
-    // Integrate Node Modules
-
-    eleventyConfig.addPassthroughCopy({
-        "./node_modules/alpinejs/dist/alpine.js": "./js/alpine.js",
-        "./js/main.js": "./js/main.js",
-    });
-
+    
     // Include assets
     eleventyConfig.addPassthroughCopy("css");
     eleventyConfig.addPassthroughCopy("js");

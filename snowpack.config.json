@@ -1,7 +1,6 @@
 {
     "mount": {
-        "_output": "/",
-        "src": "/_dist_"
+        "_output": "/"
     },
     "install": [
         "alpinejs"
