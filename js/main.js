@@ -2,11 +2,16 @@ require('../css/main.css')
 
 import 'alpinejs'
 
-let root = document.documentElement;
+const root = document.documentElement;
+const htmlClasses = document.querySelector('html').classList;
 
 const userPrefersDark =
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+if (userPrefersDark && !localStorage.getItem("themeColor")) {
+    localStorage.setItem("themeColor", "dark");
+}
 
 function darkTheme() {
     root.style.setProperty("--main-bg-color", "#1f2937");
@@ -31,29 +36,25 @@ function lightTheme() {
 }
 
 
-if (userPrefersDark || localStorage.getItem("themeColor") === "dark") {
+if (localStorage.getItem("themeColor") === "dark") {
+    htmlClasses.add('dark');
     darkTheme()
 } else {
     lightTheme()
 }
 
 window.theme = function() {
-    const isDarkTheme =
-        localStorage.getItem("themeColor") === "dark" ||
-        localStorage.getItem("userThemePreference" === "dark");
-
     return {
-        themeClass: isDarkTheme ? "dark" : "",
         toggle() {
-            let currentTheme = localStorage.getItem("themeColor");
-            if (currentTheme === "dark") {
-                lightTheme();
+            const isDarkTheme = localStorage.getItem("themeColor") === "dark";
+            if (isDarkTheme) {
+                htmlClasses.remove("dark")
                 localStorage.setItem("themeColor", "light");
-                this.themeClass = "";
+                lightTheme();
             } else {
                 darkTheme();
+                htmlClasses.add("dark")
                 localStorage.setItem("themeColor", "dark");
-                this.themeClass = "dark";
             }
         },
     };

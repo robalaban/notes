@@ -3,7 +3,7 @@ module.exports = {
         mode: "all",
         content: ["./_site/**/*.html"],
     },
-    darkMode: "class",
+    darkMode: 'class',
     theme: {
         extend: {
             typography: (theme) => ({
@@ -72,7 +72,6 @@ module.exports = {
                         },
                     },
                 },
-
                 dark: {
                     css: {
                         color: "white",
