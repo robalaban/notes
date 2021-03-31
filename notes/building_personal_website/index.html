@@ -10,7 +10,7 @@
                 Building my personal website
             
         </title>
-        <meta name="description" content="Detailed view on building a modern, statically generated website with 11ty, Snowpack deployed to Github Pages with the help of Github Actions">
+        <meta name="description" content="Detailed view on building a modern, statically generated website with 11ty, Webpack deployed to Github Pages with the help of Github Actions">
         
             <meta name="robots" content="index,follow"/>
         
@@ -58,8 +58,8 @@
 
 <section class="mx-auto lg:py-10 md:py-8 py-6 max-w-7xl flex flex-col justify-start prose lg:prose-lg xl:prose-2xl px-4 xl:px-0 dark:text-gray-600">
     <h1 class="dark:text-gray-200">Building my personal website</h1>
-    <time class="article__date" datetime="Sat Sep 19 2020 00:00:00 GMT+0000 (Coordinated Universal Time)">
-        19th Sep, 2020
+    <time class="article__date" datetime="Tue Jan 19 2021 00:00:00 GMT+0000 (Coordinated Universal Time)">
+        19th Jan, 2021
     </time>
 </section>
 
@@ -74,24 +74,26 @@
 </ul>
 <p>However, I still found myself thinking of what my <em>&quot;corner&quot;</em> of the web would look like. I had to change perspective, I had to make the project interesting enough. Luckily turns out that making a personal website is the perfect opportunity to pick-up and learn some new technologies / methodologies. After spending a good few hours seaching - I stumbled upon a few really interesting projects that I had to give a try. The culprits composing the stack for my webiste are the following:</p>
 <ul>
-<li><a href="https://www.snowpack.dev/">Snowpack</a> - Build tool</li>
+<li><a href="https://webpack.js.org/">Webpack 5</a> - Build tool</li>
 <li><a href="https://postcss.org/">PostCSS</a> - Modern CSS</li>
-<li><a href="https://native-elements.dev/">Native Elements</a> - HTML Components</li>
 <li><a href="https://www.11ty.dev/">Eleventy</a> - Static Site Generator</li>
+<li><a href="https://github.com/alpinejs/alpine">AlpineJS</a> - Minimal JS Framework</li>
+<li><a href="https://tailwindcss.com/">TailwindCSS</a> - CSS but fun</li>
+<li><a href="https://github.com/features/actions">Github Actions</a> - CD Pipeline</li>
 </ul>
 <p>Now that I have chosen and am pretty happy with the stack, I had to find out why build something from the ground up. Why not just use an existing framework / starter template? The answer was quite simple: <em>I want to make the website as user friendly as possible.</em> Things that are important to me:</p>
 <ul>
-<li>Accessability ( fonts, colors, navigation )</li>
-<li>Quick build time ( The turnaround time needs to be fast )</li>
+<li>Accessability ( typography, colors, navigation )</li>
+<li>Fast development environment ( Quick turnaround time )</li>
 <li>Serverless ( I don't want to have any overhead )</li>
 </ul>
+<p>P.S the code is <a href="https://github.com/robalaban/notes">open sourced on Github</a> ( fork it, modify it feel free to play around ) - I encourage you to take a look 👀</p>
+<h3>Accessability</h3>
+<p>Eleventy comes with some very cool features catered towards accessability. However, some of the things that I've added in are: Dark mode, fluid typography.</p>
+<h4>Typography</h4>
+<p>I haven't perfected this, but I am quite happy where the website is at. As this is a blog I focused a lot on the typography, for this I used the awesome (official) <a href="https://github.com/tailwindlabs/tailwindcss-typography">tailwind typogprahy</a> plugin, which relies on fluid typography</p>
+<h4>Dark Mode</h4>
 <h3>Setting up the environment</h3>
-<pre><code class="language-shell">mkdir Notes &amp;&amp; cd Notes
-npm init -y
-
-# Install requiered npm packages
-npm install snowpack postcss @11ty/eleventy @native-elements/core
-</code></pre>
 <p>Great! Now that we have the basic building blocks we can look at creating our directories and files that will populate our website. But before we get into that we need to set up snowpack and tell it where to look for our files to build. If like me you haven't tried Snowpack, I suggest you skim through the official docs <a href="https://www.snowpack.dev/#config-files">here</a> or just follow along.</p>
 <pre><code class="language-js">// .eleventy.js
 
