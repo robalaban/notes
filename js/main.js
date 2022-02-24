@@ -1,9 +1,9 @@
-require('../css/main.css')
+require("../css/main.css");
 
-import 'alpinejs'
+import "alpinejs";
 
 const root = document.documentElement;
-const htmlClasses = document.querySelector('html').classList;
+const htmlClasses = document.querySelector("html").classList;
 
 const userPrefersDark =
     window.matchMedia &&
@@ -28,34 +28,36 @@ function lightTheme() {
     root.style.setProperty("--main-bg-color", "#f9fafb");
     root.style.setProperty("--main-text-color", "rgba(55, 65, 81, 1)");
     root.style.setProperty("--main-bg-color-accent", "rgba(243, 244, 246, 1)");
-    root.style.setProperty("--main-accent-color-darker", "rgba(190, 24, 93, 1)");
+    root.style.setProperty(
+        "--main-accent-color-darker",
+        "rgba(190, 24, 93, 1)"
+    );
     root.style.setProperty("--main-accent-color", "rgba(219, 39, 119, 1)");
     root.style.setProperty("--intro-to", "rgba(236, 72, 153, 1)");
     root.style.setProperty("--intro-to-opacity", "rgba(236, 72, 153, 0)");
     root.style.setProperty("--intro-from", "rgba(219, 39, 119, 1)");
 }
 
-
 if (localStorage.getItem("themeColor") === "dark") {
-    htmlClasses.add('dark');
-    darkTheme()
+    htmlClasses.add("dark");
+    darkTheme();
 } else {
-    lightTheme()
+    lightTheme();
 }
 
-window.theme = function() {
+window.theme = function () {
     return {
         toggle() {
             const isDarkTheme = localStorage.getItem("themeColor") === "dark";
             if (isDarkTheme) {
-                htmlClasses.remove("dark")
+                htmlClasses.remove("dark");
                 localStorage.setItem("themeColor", "light");
                 lightTheme();
             } else {
                 darkTheme();
-                htmlClasses.add("dark")
+                htmlClasses.add("dark");
                 localStorage.setItem("themeColor", "dark");
             }
         },
     };
-}
+};

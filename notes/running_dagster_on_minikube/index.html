@@ -1,0 +1,174 @@
+<!doctype html>
+<html id="_html" x-data="theme()" lang="en" class="min-h-full antialiased">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Robert Balaban
+            
+                -
+                Setting up Dagster on Minikube with Terraform
+            
+        </title>
+        <meta name="description" content="Quick walkthrough on getting up and running with Dagster locally on a Kubernetes cluster with Terraform">
+        
+            <meta name="robots" content="index,follow"/>
+        
+
+        
+        <link rel="icon" type="image/png" href="/images/favicon.ico">
+
+        
+        <link rel="canonical" href="/notes/running_dagster_on_minikube/">
+
+        <link rel="stylesheet" href="/assets/main.bundle.css">
+        <script src="/assets/main.bundle.js"></script>
+    </head>
+
+    
+
+<header class="mx-auto lg:py-12 md:py-8 py-6 max-w-7xl flex items-center px-4 xl:px-0 justify-between">
+  <nav class="">
+    
+      <a class="pr-4 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 dark:hover:text-pink-600 hover:text-gray-900 text-gray-400" href="/">Home</a>
+    
+      <a class="pr-4 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 dark:hover:text-pink-600 hover:text-gray-900 text-gray-400" href="/about/">About</a>
+    
+    <a class="pr-4 leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 dark:hover:text-pink-600 hover:text-gray-900 text-gray-400" rel="noreferrer" href="https://github.com/robalaban" target="_blank">Github</a>
+    <a class="leading-6 sm:text-xl font-semibold focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 dark:hover:text-pink-600 hover:text-gray-900 text-gray-400" rel="noreferrer" href="https://www.linkedin.com/in/robalaban/" target="_blank">LinkedIn</a>
+  </nav>
+  <div x-on:click="toggle()" class="cursor-pointer">
+    
+    <svg class="w-8 focus:outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-offset-white focus-visible:ring-gray-300 dark:hover:text-pink-600 hover:text-gray-900 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+    </svg>
+  </div>
+</header>
+
+
+    <body class="dark:text-gray-300 text-gray-700" >
+
+        <a class="sr-only" href="#main">Skip to content</a>
+
+        <main class="">
+
+            
+            
+
+
+<section class="mx-auto lg:py-10 md:py-8 py-6 max-w-7xl flex flex-col justify-start prose lg:prose-lg xl:prose-2xl px-4 xl:px-0 dark:text-gray-600">
+    <h1 class="dark:text-gray-200">Setting up Dagster on Minikube with Terraform</h1>
+    <time class="article__date" datetime="Thu Feb 24 2022 00:00:00 GMT+0000 (Coordinated Universal Time)">
+        24th Feb, 2022
+    </time>
+</section>
+
+
+<article class="prose dark:prose-dark sm:prose  lg:prose-lg  xl:prose-2xl  dark:xl:prose-2xl mx-auto px-4 md:px-0">
+
+    <section>
+        <p><a href="https://dagster.io/">Dagster</a> is a data orchestration platform similar to <a href="https://airflow.apache.org/">Airflow</a> and <a href="https://www.prefect.io/">Prefect</a> I won't go into the difference or similarity amongst the tools, but after using both Airflow and Dagster, I happen to realy like Dagsters API and easy of use. Especially when it comes to the deployment.</p>
+<p>The following tutorial is a step by step guide on getting started with Dagster on Kubernetes specifically minikube.</p>
+<h3>Environment</h3>
+<p>In order to keep things simple, a local cluster with minikube is going to be the environment of choice. Minikube <a href="https://minikube.sigs.k8s.io/docs/start/">has a comprehensive guide</a> on getting started on all platforms, but for this tutorial I will be focusing on OSX.</p>
+<pre><code class="language-shell">brew install minikube
+</code></pre>
+<p>Start our local kubernetes cluster:</p>
+<pre><code class="language-sh">minikube start
+</code></pre>
+<p>Starting a local minikube cluster will automatically create an entry in: <code>~/.kube/config</code> ( this will be useful in a little while, so remember that path )</p>
+<h3>Terraform</h3>
+<p>Great, now that we have a Kubernetes cluster running on our machine, next up is &quot;hooking&quot; terraform to it, so that we can manage resources with it. Lets do that:</p>
+<p>Create the following structure in any folder you want, to keep things simple, I just named the folder: <code>dagster-orchestration</code></p>
+<pre><code class="language-sh">└── dagster-orchestration
+    ├── chart.tf
+    ├── main.tf
+    ├── opt
+    │   └── values.yaml
+    └── providers.tf
+</code></pre>
+<p>Alright, now that we got the structre out of the way and all the folders time to take a look at what is inside.</p>
+<p><strong>Providers.tf</strong></p>
+<p>Usually, I like to keep in here information about the different providers I am going to use, in our case kubernetes and helm:</p>
+<pre><code class="language-hcl">terraform {
+	required_providers {
+		kubernetes = {
+			source = &quot;hashicorp/kubernetes&quot;
+			version = &quot;&gt;= 2.0.0&quot;
+		}
+	}
+}
+
+provider &quot;kubernetes&quot; {
+	config_path = &quot;~/.kube/config&quot;
+	config_context = &quot;minikube&quot;
+}
+
+provider &quot;helm&quot; {
+	kubernetes {
+		config_path = &quot;~/.kube/config&quot;
+		config_context = &quot;minikube&quot;
+	}
+}
+</code></pre>
+<p>Everything above should look fairl standard except maybe <code>config_context</code> in the helm provider and the kubernetes provider, this is used to to specify which kuberntes in our config file we will be targeting, useful if you have multiple kubernetse configs ( production / staging / local ).</p>
+<p>Alright, now that we have the <code>provider.tf</code> all set up, we can quickly run: <code>terraform init</code> to initialize terraforms state backend and download any providers we will be using.</p>
+<p><strong>Chart.tf</strong></p>
+<p>I have a convention to name the file <code>chart.tf</code> if the resource is using a helm chart, in our case, to keep things simple we're using the official helm chart from dagster. More information can be found here <a href="https://docs.dagster.io/deployment/guides/kubernetes/deploying-with-helm">on their official website</a></p>
+<pre><code class="language-hcl">resource &quot;helm_release&quot; &quot;dagster&quot; {
+	name = &quot;dagster&quot;
+	repository = &quot;https://dagster-io.github.io/helm&quot;
+	chart = &quot;dagster&quot;
+
+	values = [
+		&quot;${file(&quot;/opt/values.yaml&quot;)}&quot;
+	]
+}
+</code></pre>
+<p>The value array holds the <code>values.yaml</code> file, this file is used to store configuration about the helm chart we will be deploying, a full and up-to-date file can be found on <a href="https://github.com/dagster-io/dagster/edit/master/helm/dagster/values.yaml">dagsters github</a>.</p>
+<p>There is a very small change we're going to make, in <code>values.yaml</code> we need to add a tag to the example user code:</p>
+<pre><code class="language-yaml">deployments:
+  - name: &quot;k8s-example-user-code-1&quot;
+    image:
+	# When a tag is not supplied, it will default as the Helm chart version.
+	repository: &quot;docker.io/dagster/user-code-example&quot;
+	tag: ~ &lt;- change to latest
+</code></pre>
+<p>Now that the chart is in place and to test that everything is working, we can keep the default values for now in <code>values.yaml</code> and run <code>terraform apply</code>. This is goint to create the resources defined in the helm chart, on our kubernetes cluster, pretty neat no?</p>
+<p>It should take about <em>4ish</em> minutes to complete, but if that is done with success we can run <code>minikube dashbaord</code> this will open a browser, here we can see our pods happily running.</p>
+<h3>Accessing Dagster</h3>
+<p>Although we do not have an ingress set-up we can quickly access dagster UI running the following.</p>
+<pre><code class="language-sh">minikube service dagster-dagit --url
+</code></pre>
+<p>🙌 Great job you have sucessfully deployed Dagster on Kubernetes!</p>
+
+    </section>
+
+    <footer class="grid grid-cols-2 gap-4">
+        
+            <figure class="article-footer-figure rounded-xl p-8 col-start-1">
+                <p class="text-gray-700">Previous article</p>
+                <a href="/notes/building_personal_website/">Building my personal website</a>
+            </figure>
+        
+        
+    </footer>
+
+</article>
+
+
+        </main>
+
+        <footer class="flex flex-col justify-center items-center pt-12 pb-12 prose lg:prose-lg xl:prose-2xl text-gray-300 dark:text-gray-700 prose-pink mx-auto">
+  <div>
+    97 - Today
+  </div>
+  <div>
+    Built with 💜 open sourced on
+    <a class="dark:text-pink-500 text-pink-500" href="https://github.com/robalaban/notes" target="_blank">Github</a>
+  </div>
+</footer>
+
+
+    </body>
+</html>

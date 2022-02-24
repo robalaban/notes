@@ -15,16 +15,16 @@
     --secondary-accent-color: @apply bg-gray-700;
     --secondary-accent-color-dark: @apply bg-gray-800;
 
-    --intro-to: @apply bg-pink-500;
+    --intro-to: #fff6cd;
     --intro-to-opacity: rgba(236, 72, 153, 0);
-    --intro-from: @apply bg-pink-600;
+    --intro-from: #f0d9e7;
 }
 
-::-moz-selection { 
+::-moz-selection {
     background: rgba(236, 72, 153, 0.8);
 }
 
-::selection { 
+::selection {
     background: rgba(236, 72, 153, 0.8);
 }
 
@@ -38,7 +38,8 @@ main a {
 }
 
 .intro {
-    --gradient-stops: var(--intro-from), var(--intro-to, var(--intro-to-opacity));
+    --gradient-stops: var(--intro-from),
+        var(--intro-to, var(--intro-to-opacity));
     background-image: linear-gradient(to bottom right, var(--gradient-stops));
     background-color: var(--main-accent-color-dark);
 }
@@ -50,7 +51,6 @@ main a {
 .intro-disclaimer {
     background-color: var(--main-accent-color-dark);
 }
-
 
 .article-footer-figure {
     background-color: var(--main-bg-color-accent);
