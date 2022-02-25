@@ -52,21 +52,6 @@ main a {
     color: var(--main-accent-color);
 }
 
-.intro {
-    --gradient-stops: var(--intro-from),
-        var(--intro-to, var(--intro-to-opacity));
-    background-image: linear-gradient(to bottom right, var(--gradient-stops));
-    background-color: var(--main-accent-color-dark);
-}
-
-.intro-wave {
-    background-color: var(--main-accent-color-darker);
-}
-
-.intro-disclaimer {
-    background-color: var(--main-accent-color-dark);
-}
-
 .article-footer-figure {
     background-color: var(--main-bg-color-accent);
 }
