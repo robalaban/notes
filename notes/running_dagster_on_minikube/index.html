@@ -71,75 +71,31 @@
 <p>The following tutorial is a step by step guide on getting started with Dagster on Kubernetes specifically minikube.</p>
 <h3>Environment</h3>
 <p>In order to keep things simple, a local cluster with minikube is going to be the environment of choice. Minikube <a href="https://minikube.sigs.k8s.io/docs/start/">has a comprehensive guide</a> on getting started on all platforms, but for this tutorial I will be focusing on OSX.</p>
-<pre><code class="language-shell">brew install minikube
-</code></pre>
+<pre class="language-shell"><code class="language-shell">brew <span class="token function">install</span> minikube</code></pre>
 <p>Start our local kubernetes cluster:</p>
-<pre><code class="language-sh">minikube start
-</code></pre>
+<pre class="language-shell"><code class="language-shell">minikube start</code></pre>
 <p>Starting a local minikube cluster will automatically create an entry in: <code>~/.kube/config</code> ( this will be useful in a little while, so remember that path )</p>
 <h3>Terraform</h3>
 <p>Great, now that we have a Kubernetes cluster running on our machine, next up is &quot;hooking&quot; terraform to it, so that we can manage resources with it. Lets do that:</p>
 <p>Create the following structure in any folder you want, to keep things simple, I just named the folder: <code>dagster-orchestration</code></p>
-<pre><code class="language-sh">└── dagster-orchestration
-    ├── chart.tf
-    ├── main.tf
-    ├── opt
-    │   └── values.yaml
-    └── providers.tf
-</code></pre>
+<pre class="language-shell"><code class="language-shell">└── dagster-orchestration<br>    ├── chart.tf<br>    ├── main.tf<br>    ├── opt<br>    │   └── values.yaml<br>    └── providers.tf</code></pre>
 <p>Alright, now that we got the structre out of the way and all the folders time to take a look at what is inside.</p>
 <p><strong>Providers.tf</strong></p>
 <p>Usually, I like to keep in here information about the different providers I am going to use, in our case kubernetes and helm:</p>
-<pre><code class="language-hcl">terraform {
-	required_providers {
-		kubernetes = {
-			source = &quot;hashicorp/kubernetes&quot;
-			version = &quot;&gt;= 2.0.0&quot;
-		}
-	}
-}
-
-provider &quot;kubernetes&quot; {
-	config_path = &quot;~/.kube/config&quot;
-	config_context = &quot;minikube&quot;
-}
-
-provider &quot;helm&quot; {
-	kubernetes {
-		config_path = &quot;~/.kube/config&quot;
-		config_context = &quot;minikube&quot;
-	}
-}
-</code></pre>
+<pre class="language-hcl"><code class="language-hcl"><span class="token keyword">terraform</span> <span class="token punctuation">{</span><br>	<span class="token keyword">required_providers</span> <span class="token punctuation">{</span><br>		<span class="token property">kubernetes</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span><br>			<span class="token property">source</span> <span class="token punctuation">=</span> <span class="token string">"hashicorp/kubernetes"</span><br>			<span class="token property">version</span> <span class="token punctuation">=</span> <span class="token string">">= 2.0.0"</span><br>		<span class="token punctuation">}</span><br>	<span class="token punctuation">}</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">provider<span class="token type variable"> "kubernetes" </span></span><span class="token punctuation">{</span><br>	<span class="token property">config_path</span> <span class="token punctuation">=</span> <span class="token string">"~/.kube/config"</span><br>	<span class="token property">config_context</span> <span class="token punctuation">=</span> <span class="token string">"minikube"</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">provider<span class="token type variable"> "helm" </span></span><span class="token punctuation">{</span><br>	<span class="token keyword">kubernetes</span> <span class="token punctuation">{</span><br>		<span class="token property">config_path</span> <span class="token punctuation">=</span> <span class="token string">"~/.kube/config"</span><br>		<span class="token property">config_context</span> <span class="token punctuation">=</span> <span class="token string">"minikube"</span><br>	<span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
 <p>Everything above should look fairl standard except maybe <code>config_context</code> in the helm provider and the kubernetes provider, this is used to to specify which kuberntes in our config file we will be targeting, useful if you have multiple kubernetse configs ( production / staging / local ).</p>
 <p>Alright, now that we have the <code>provider.tf</code> all set up, we can quickly run: <code>terraform init</code> to initialize terraforms state backend and download any providers we will be using.</p>
 <p><strong>Chart.tf</strong></p>
 <p>I have a convention to name the file <code>chart.tf</code> if the resource is using a helm chart, in our case, to keep things simple we're using the official helm chart from dagster. More information can be found here <a href="https://docs.dagster.io/deployment/guides/kubernetes/deploying-with-helm">on their official website</a></p>
-<pre><code class="language-hcl">resource &quot;helm_release&quot; &quot;dagster&quot; {
-	name = &quot;dagster&quot;
-	repository = &quot;https://dagster-io.github.io/helm&quot;
-	chart = &quot;dagster&quot;
-
-	values = [
-		&quot;${file(&quot;/opt/values.yaml&quot;)}&quot;
-	]
-}
-</code></pre>
+<pre class="language-hcl"><code class="language-hcl"><span class="token keyword">resource <span class="token type variable">"helm_release"</span></span> <span class="token string">"dagster"</span> <span class="token punctuation">{</span><br>	<span class="token property">name</span> <span class="token punctuation">=</span> <span class="token string">"dagster"</span><br>	<span class="token property">repository</span> <span class="token punctuation">=</span> <span class="token string">"https://dagster-io.github.io/helm"</span><br>	<span class="token property">chart</span> <span class="token punctuation">=</span> <span class="token string">"dagster"</span><br><br>	<span class="token property">values</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><br>		<span class="token string">"<span class="token interpolation"><span class="token punctuation">$</span><span class="token punctuation">{</span><span class="token function">file</span><span class="token punctuation">(</span><span class="token string">"/opt/values.yaml"</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span>"</span><br>	<span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
 <p>The value array holds the <code>values.yaml</code> file, this file is used to store configuration about the helm chart we will be deploying, a full and up-to-date file can be found on <a href="https://github.com/dagster-io/dagster/edit/master/helm/dagster/values.yaml">dagsters github</a>.</p>
 <p>There is a very small change we're going to make, in <code>values.yaml</code> we need to add a tag to the example user code:</p>
-<pre><code class="language-yaml">deployments:
-  - name: &quot;k8s-example-user-code-1&quot;
-    image:
-	# When a tag is not supplied, it will default as the Helm chart version.
-	repository: &quot;docker.io/dagster/user-code-example&quot;
-	tag: ~ &lt;- change to latest
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">deployments</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">"k8s-example-user-code-1"</span><br>    <span class="token key atrule">image</span><span class="token punctuation">:</span><br>	<span class="token comment"># When a tag is not supplied, it will default as the Helm chart version.</span><br>	<span class="token key atrule">repository</span><span class="token punctuation">:</span> <span class="token string">"docker.io/dagster/user-code-example"</span><br>	<span class="token key atrule">tag</span><span class="token punctuation">:</span> ~ &lt;<span class="token punctuation">-</span> change to latest</code></pre>
 <p>Now that the chart is in place and to test that everything is working, we can keep the default values for now in <code>values.yaml</code> and run <code>terraform apply</code>. This is goint to create the resources defined in the helm chart, on our kubernetes cluster, pretty neat no?</p>
 <p>It should take about <em>4ish</em> minutes to complete, but if that is done with success we can run <code>minikube dashbaord</code> this will open a browser, here we can see our pods happily running.</p>
 <h3>Accessing Dagster</h3>
 <p>Although we do not have an ingress set-up we can quickly access dagster UI running the following.</p>
-<pre><code class="language-sh">minikube service dagster-dagit --url
-</code></pre>
+<pre class="language-shell"><code class="language-shell">minikube <span class="token function">service</span> dagster-dagit --url</code></pre>
 <p>🙌 Great job you have sucessfully deployed Dagster on Kubernetes!</p>
 
     </section>
