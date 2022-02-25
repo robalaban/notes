@@ -24,7 +24,7 @@ brew install minikube
 
 Start our local kubernetes cluster:
 
-```sh
+```shell
 minikube start
 ```
 
@@ -36,7 +36,7 @@ Great, now that we have a Kubernetes cluster running on our machine, next up is 
 
 Create the following structure in any folder you want, to keep things simple, I just named the folder: `dagster-orchestration`
 
-```sh
+```shell
 └── dagster-orchestration
     ├── chart.tf
     ├── main.tf
@@ -115,7 +115,7 @@ It should take about _4ish_ minutes to complete, but if that is done with succes
 
 Although we do not have an ingress set-up we can quickly access dagster UI running the following.
 
-```sh
+```shell
 minikube service dagster-dagit --url
 ```
 

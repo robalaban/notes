@@ -1,8 +1,10 @@
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = (eleventyConfig) => {
     // Plugins
     eleventyConfig.addPlugin(eleventyNavigationPlugin);
+    eleventyConfig.addPlugin(syntaxHighlight);
 
     // Filters
     eleventyConfig.addFilter("dateDisplay", require("./filters/date.js"));
@@ -24,7 +26,7 @@ module.exports = (eleventyConfig) => {
     // Layout aliases
     eleventyConfig.addLayoutAlias("default", "layouts/default.njk");
     eleventyConfig.addLayoutAlias("post", "layouts/note.njk");
-    
+
     // Include assets
     eleventyConfig.addPassthroughCopy("css");
     eleventyConfig.addPassthroughCopy("js");
