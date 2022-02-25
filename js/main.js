@@ -19,9 +19,6 @@ function darkTheme() {
     root.style.setProperty("--main-bg-color-accent", "rgba(17, 24, 39, 1)");
     root.style.setProperty("--main-accent-color", "rgba(31, 41, 55, 1)");
     root.style.setProperty("--main-accent-color-darker", "rgba(17, 24, 39, 1)");
-    root.style.setProperty("--intro-to", "rgba(55, 65, 81, 1)");
-    root.style.setProperty("--intro-to-opacity", "rgba(55, 65, 81, 0)");
-    root.style.setProperty("--intro-from", "rgba(31, 41, 55, 1)");
 }
 
 function lightTheme() {
@@ -33,9 +30,6 @@ function lightTheme() {
         "rgba(190, 24, 93, 1)"
     );
     root.style.setProperty("--main-accent-color", "rgba(219, 39, 119, 1)");
-    root.style.setProperty("--intro-to", "rgba(236, 72, 153, 1)");
-    root.style.setProperty("--intro-to-opacity", "rgba(236, 72, 153, 0)");
-    root.style.setProperty("--intro-from", "rgba(219, 39, 119, 1)");
 }
 
 if (localStorage.getItem("themeColor") === "dark") {
